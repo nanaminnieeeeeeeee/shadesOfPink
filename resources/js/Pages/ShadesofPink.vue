@@ -81,6 +81,7 @@ export default {
       this.showModal = true;
     },
     openDeleteModal(shade) {
+      console.log("Delete modal should open for shade:", shade);
       this.shadeToDelete = shade;
       this.showDeleteModal = true;
     },
@@ -144,7 +145,7 @@ export default {
                           </div>
                           
                           <!-- Modal for Adding/Editing Shades -->
-                          <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                          <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                               <div class="bg-white p-6 rounded-lg w-96">
                                   <div class="flex justify-between items-center mb-4">
                                       <h2 class="text-xl font-bold">{{ editMode ? 'Edit Shade' : 'Add Shade' }}</h2>
@@ -165,6 +166,24 @@ export default {
                                           {{ editMode ? 'Update Shade' : 'Add Shade' }}
                                       </button>
                                   </form>
+                              </div>
+                          </div>
+
+                          <!-- Confirmation Modal for Deleting a Shade -->
+                          <div v-if="showDeleteModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                              <div class="bg-white p-6 rounded-lg w-96">
+                                  <div class="flex justify-between items-center mb-4">
+                                      <h2 class="text-xl font-bold">Delete Shade</h2>
+                                  </div>
+                                  <p>Are you sure you want to delete this shade?</p>
+                                  <div class="flex justify-end mt-6">
+                                      <button @click="closeDeleteModal" class="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded mr-2">
+                                          Cancel
+                                      </button>
+                                      <button @click="confirmDelete" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                          Delete
+                                      </button>
+                                  </div>
                               </div>
                           </div>
 
