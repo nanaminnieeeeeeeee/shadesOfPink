@@ -23,10 +23,11 @@ class ShadeController extends Controller
                 'name' => $shade->name,
                 'color_code' => $shade->color_code,
                 'created_at' => $shade->created_at->format('Y-m-d'),
+                'updated_at' => $shade->updated_at && $shade->updated_at != $shade->created_at ? $shade->updated_at->format('Y-m-d') : null,
                 'created_by' => $shade->user ? $shade->user->name : 'Unknown',
             ];
         });
-
+    
         return Inertia::render('ShadesofPink', [
             'shades' => $shades,
         ]);
@@ -52,10 +53,7 @@ class ShadeController extends Controller
     // Method to update an existing shade
     public function update(Request $request, Shade $shade)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:shades,name,' . $shade->id,
-            'color_code' => 'required|string|max:7|unique:shades,color_code,' . $shade->id,
-        ]);
+
 
         $shade->update($request->only(['name', 'color_code']));
 

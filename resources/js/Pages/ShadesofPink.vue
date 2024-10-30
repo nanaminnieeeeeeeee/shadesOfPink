@@ -191,15 +191,16 @@ export default {
                           <div class="overflow-x-auto">
                               <table class="min-w-full bg-white border rounded-lg shadow-md overflow-hidden">
                                   <thead>
-                                      <tr class="bg-pink-200 text-left text-gray-600 uppercase text-sm leading-normal">
+                                    <tr class="bg-pink-200 text-left text-gray-600 uppercase text-sm leading-normal">
                                           <th class="py-3 px-6">Name</th>
                                           <th class="py-3 px-6">Code</th>
                                           <th class="py-3 px-6">Color</th>
                                           <th class="py-3 px-6">Created By</th>
                                           <th class="py-3 px-6">Created Date</th>
+                                          <th class="py-3 px-6">Updated At</th>
                                           <th class="py-3 px-6">Actions</th>
                                       </tr>
-                                  </thead>
+                                    </thead>
                                   <tbody class="text-gray-600 text-sm font-light">
                                       <tr v-for="shade in paginatedShades" :key="shade.id" class="border-b border-gray-200 hover:bg-pink-100">
                                           <td class="py-3 px-6">{{ shade.name }}</td>
@@ -209,6 +210,7 @@ export default {
                                           </td>
                                           <td class="py-3 px-6">{{ shade.created_by }}</td>
                                           <td class="py-3 px-6">{{ formatDate(shade.created_at) }}</td>
+                                          <td class="py-3 px-6">{{ shade.updated_at ? formatDate(shade.updated_at) : '-' }}</td>
                                           <td class="py-3 px-6 flex items-center">
                                               <button @click="editShade(shade)" class="text-gray-500 hover:text-gray-700 mr-3">
                                                   <i class="fas fa-edit"></i>
