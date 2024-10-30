@@ -23,7 +23,7 @@ class ShadeController extends Controller
                 'name' => $shade->name,
                 'color_code' => $shade->color_code,
                 'created_at' => $shade->created_at->format('Y-m-d'),
-                'updated_at' => $shade->updated_at && $shade->updated_at != $shade->created_at ? $shade->updated_at->format('Y-m-d') : null,
+                'updated_at' => $shade->updated_at && $shade->updated_at != $shade->created_at ? $shade->updated_at->format('Y-m-d H:i:s') : null,
                 'created_by' => $shade->user ? $shade->user->name : 'Unknown',
             ];
         });

@@ -41,9 +41,9 @@ export default {
     }
   },
   methods: {
-    formatDate(date) {
-      if (date) {
-        return new Date(date).toISOString().split('T')[0];
+    formatDateTime(dateTime) {
+      if (dateTime) {
+        return new Date(dateTime).toLocaleString(); // Formats to 'MM/DD/YYYY, HH:mm:ss AM/PM'
       }
       return '';
     },
@@ -209,8 +209,8 @@ export default {
                                               <div :style="{ backgroundColor: shade.color_code, width: '50px', height: '20px' }" class="rounded"></div>
                                           </td>
                                           <td class="py-3 px-6">{{ shade.created_by }}</td>
-                                          <td class="py-3 px-6">{{ formatDate(shade.created_at) }}</td>
-                                          <td class="py-3 px-6">{{ shade.updated_at ? formatDate(shade.updated_at) : '-' }}</td>
+                                          <td class="py-3 px-6">{{ formatDateTime(shade.created_at) }}</td>
+                                          <td class="py-3 px-6">{{ shade.updated_at ? formatDateTime(shade.updated_at) : '-' }}</td>
                                           <td class="py-3 px-6 flex items-center">
                                               <button @click="editShade(shade)" class="text-gray-500 hover:text-gray-700 mr-3">
                                                   <i class="fas fa-edit"></i>
