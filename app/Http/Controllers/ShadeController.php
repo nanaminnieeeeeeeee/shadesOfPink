@@ -16,22 +16,22 @@ class ShadeController extends Controller
 
     // Method to render the Shades of Pink page
     public function shadesOfPink()
-    {
-        $shades = Shade::with('user')->get()->map(function ($shade) {
-            return [
-                'id' => $shade->id,
-                'name' => $shade->name,
-                'color_code' => $shade->color_code,
-                'created_at' => $shade->created_at->format('Y-m-d'),
-                'updated_at' => $shade->updated_at && $shade->updated_at != $shade->created_at ? $shade->updated_at->format('Y-m-d H:i:s') : null,
-                'created_by' => $shade->user ? $shade->user->name : 'Unknown',
-            ];
-        });
-    
-        return Inertia::render('ShadesofPink', [
-            'shades' => $shades,
-        ]);
-    }
+{
+    $shades = Shade::with('user')->get()->map(function ($shade) {
+        return [
+            'id' => $shade->id,
+            'name' => $shade->name,
+            'color_code' => $shade->color_code,
+            'created_at' => $shade->created_at->timezone(config('app.timezone'))->format('Y-m-d H:i:s'),
+            'updated_at' => $shade->updated_at && $shade->updated_at != $shade->created_at ? $shade->updated_at->timezone(config('app.timezone'))->format('Y-m-d H:i:s') : null,
+            'created_by' => $shade->user ? $shade->user->name : 'Unknown',
+        ];
+    });
+
+    return Inertia::render('ShadesofPink', [
+        'shades' => $shades,
+    ]);
+}
 
     // Method to store a new shade
     public function store(Request $request)
